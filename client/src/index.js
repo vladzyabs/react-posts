@@ -3,14 +3,13 @@ import { render } from 'react-dom';
 
 import './index.css';
 
-import App from './App';
+import ApolloProvider from './ApolloProvider';
 
 const $root = document.getElementById('root');
 
 render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider />
   </React.StrictMode>,
   $root,
 );
-
