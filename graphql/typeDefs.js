@@ -4,13 +4,15 @@ const gql = require('graphql-tag');
 module.exports = gql`
   # Типы данных для постов
   type Post {
-    id:        ID!
-    body:      String!
-    username:  String!
-    user:      ID!
-    createdAt: String!
-    comments:  [Comment]!
-    likes:     [Like]!
+    id:           ID!
+    body:         String!
+    username:     String!
+    user:         ID!
+    createdAt:    String!
+    comments:     [Comment]!
+    likes:        [Like]!
+    likeCount:    Int!
+    commentCount: Int!
   }
   # Тип данных для комментариев
   type Comment {
