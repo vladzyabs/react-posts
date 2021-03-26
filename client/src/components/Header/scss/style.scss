@@ -1,0 +1,27 @@
+header.header {
+  position:         absolute;
+  z-index:          999;
+  top:              0;
+  right:            0;
+  left:             0;
+  background-color: #dedede;
+
+  nav.navigation {
+    ul {
+      height:          70px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+
+      li {
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+
+        a {
+          color: black;
+        }
+      }
+    }
+  }
+}

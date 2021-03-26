@@ -1,25 +1,18 @@
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import PATHS      from './paths';
 import {
   Home,
   Login,
   Register,
-} from './pages';
-
-const PATHS = {
-  HOME:     '/',
-  LOGIN:    '/login',
-  REGISTER: '/register',
-};
+}                 from './pages';
+import { Header } from './components';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <Link to={PATHS.HOME}>Home</Link>
-        <Link to={PATHS.LOGIN}>login</Link>
-        <Link to={PATHS.REGISTER}>register</Link>
-      </div>
+      <Header />
+
       <Switch>
         <Route exact path={PATHS.HOME} component={Home} />
         <Route exact path={PATHS.LOGIN} component={Login} />
