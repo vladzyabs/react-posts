@@ -54,7 +54,7 @@ module.exports = {
 
         // Если комментарий не найден
         if (index === -1) {
-          throw new UserInputError('Comment not found')
+          throw new UserInputError('Comment not found');
         }
 
         // Комментарии может удалять только добавивший его пользователь
@@ -69,6 +69,36 @@ module.exports = {
         } else {
           throw new AuthenticationError('Action not allowed');
         }
+      } else {
+        throw new UserInputError('Post not found');
+      }
+    },
+
+    // "Лайк" поста
+    likePost: async (_, {postId}, context) => {
+      const user = checkAuth(context);
+      const post = await Post.findById(postId);
+
+      if (post) {
+        const liked = post.likes.find(like => like.user.toString() === user.id.toString());
+
+        if (liked) {
+          // Пост "лайкнут"
+          post.likes = post.likes.filter(like => like.user.toString() !== user.id.toString());
+        } else {
+          // Пост не "лайкнут"
+          post.likes.push({
+            username:  user.username,
+            user:      user.id,
+            createdAt: new Date().toISOString(),
+          });
+        }
+
+        // Сохраняем пост
+        await post.save();
+
+        // и возвращаем его
+        return post;
       } else {
         throw new UserInputError('Post not found');
       }

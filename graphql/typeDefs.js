@@ -25,6 +25,7 @@ module.exports = gql`
     id:        ID!
     createdAt: String!
     username:  String!
+    user:      ID!
   }
   # Типы данных для пользователей
   type User {
@@ -65,6 +66,6 @@ module.exports = gql`
     createComment(postId: ID!, body: String!):  Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
 
-    lokePost(postId: ID!): Post!
+    likePost(postId: ID!): Post!
   }
 `;

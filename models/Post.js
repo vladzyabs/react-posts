@@ -19,6 +19,10 @@ const postSchema = new Schema({
     {
       username:  String,
       createdAt: Date,
+      user:      {
+        type: Schema.Types.ObjectId,
+        ref:  'User',
+      },
     },
   ],
   user:      {
