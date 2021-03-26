@@ -34,8 +34,10 @@ const client = new ApolloClient({
 });
 
 // Экспортируем провайдер
-export default () => (
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
-)
+export default function Apollo() {
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
+}
