@@ -4,11 +4,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "server": "node index",
+    "client": "yarn --cwd client start",
+    "start": "concurrently \"node index\" \"yarn --cwd client start\""
   },
   "dependencies": {
     "apollo-server": "^2.21.2",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.0.0",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "jsonwebtoken": "^8.5.1",
