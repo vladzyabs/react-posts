@@ -56,8 +56,10 @@ module.exports = {
       const user = checkAuth(context);
 
       try {
+        // Находим пост
         const post = await Post.findById(postId);
 
+        // Удалять посты может только добавивший их пользователь
         if (user.id.toString() === post.user.toString()) {
           await post.delete();
           return 'Post deleted successfully';
