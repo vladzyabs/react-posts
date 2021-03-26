@@ -48,7 +48,14 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      return await newPost.save();
+      const post = await newPost.save();
+
+      // Уведомляем подписчиков о новом посте
+      context.pubSub.publish('NEW_POST', {
+        newPost: post,
+      });
+
+      return post;
     },
 
     // Удаление поста
@@ -69,6 +76,12 @@ module.exports = {
       } catch (error) {
         throw new Error(error);
       }
+    },
+  },
+  // Подписка
+  Subscription: {
+    newPost: {
+      subscribe: (_, __, {pubSub}) => pubSub.asyncIterator('NEW_POST'),
     },
   },
 };

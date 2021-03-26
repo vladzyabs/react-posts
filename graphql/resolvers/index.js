@@ -3,12 +3,15 @@ const postsResolvers    = require('./posts');
 const usersResolvers    = require('./users');
 
 module.exports = {
-  Query:    {
+  Query:        {
     ...postsResolvers.Query,
   },
-  Mutation: {
+  Mutation:     {
     ...commentsResolvers.Mutation,
     ...postsResolvers.Mutation,
     ...usersResolvers.Mutation,
+  },
+  Subscription: {
+    ...postsResolvers.Subscription,
   },
 };

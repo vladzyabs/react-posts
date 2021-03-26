@@ -1,15 +1,17 @@
-const {ApolloServer} = require('apollo-server'); // Сервер
+const {ApolloServer, PubSub} = require('apollo-server'); // Сервер
 const mongoose       = require('mongoose'); // db
 
 const typeDefs  = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 const {MONGODB} = require('./config');
 
+const pubSub = new PubSub()
+
 // Инициализация сервера
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({req}) => ({req}),
+  context: ({req}) => ({req, pubSub}),
 });
 
 // Подключение db
