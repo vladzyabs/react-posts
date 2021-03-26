@@ -7,6 +7,7 @@ module.exports = gql`
     id:        ID!
     body:      String!
     username:  String!
+    user:      ID!
     createdAt: String!
   }
   # Типы данных для пользователей
