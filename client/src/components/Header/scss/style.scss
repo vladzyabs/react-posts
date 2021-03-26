@@ -20,6 +20,10 @@ header.header {
 
         a {
           color: black;
+
+          &.active {
+            color: blue;
+          }
         }
       }
     }
