@@ -33,9 +33,13 @@ module.exports = {
   // Мутации
   Mutation: {
     // Создание поста
-    createPost: async (_, {body}, context) => {
+    createPost: async (_, {body, title}, context) => {
       // Получаем пользователя
       const user = checkAuth(context);
+
+      if (title.trim() === '') {
+        throw new Error('Title must not be empty');
+      }
 
       if (body.trim() === '') {
         throw new Error('Post must not be empty');
@@ -43,6 +47,7 @@ module.exports = {
 
       const newPost = new Post({
         body,
+        title,
         user:      user.id,
         username:  user.username,
         createdAt: new Date().toISOString(),

@@ -6,13 +6,14 @@ module.exports = gql`
   type Post {
     id:           ID!
     body:         String!
-    username:     String!
-    user:         ID!
-    createdAt:    String!
     comments:     [Comment]!
+    commentCount: Int!
+    createdAt:    String!
     likes:        [Like]!
     likeCount:    Int!
-    commentCount: Int!
+    title:        String!
+    user:         ID!
+    username:     String!
   }
   # Тип данных для комментариев
   type Comment {
@@ -62,7 +63,7 @@ module.exports = gql`
     login(email: String!, password: String!):                 User!
     changePassword(changePasswordInput: ChangePasswordInput): User!
 
-    createPost(body: String!): Post!
+    createPost(body: String!, title: String!): Post!
     deletePost(postId: ID!):   String!
 
     createComment(postId: ID!, body: String!):  Post!
