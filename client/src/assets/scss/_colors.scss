@@ -1,0 +1,30 @@
+/******************** HEX ********************/
+
+$accent:              #ff9e03;
+$alabaster:           #fbfbfb;
+$white:               #ffffff;
+$black:               #000000;
+$shark:               #222326;
+$river-bed:           #4b555f;
+$bali-hai:            #8390ac;
+$silver-chalice:      #a4a4a4;
+$athens-gray:         #f2f3f7;
+$mercury:             #e2e2e2;
+$mercury-d:           #e5e5e5;
+
+$niblet-green:        #7bc12d;
+$nectarous-nectarine: #de5761;
+$golden-mary:         #efbf39;
+
+$success:             rgba($niblet-green, 0.95);
+$warning:             rgba($golden-mary, 0.95);
+$error:               rgba($nectarous-nectarine, 0.95);
+$bg-opacity:          rgba($bali-hai, 0.6);
+
+/******************** GRADIENT ********************/
+
+$orange-gradient:     linear-gradient(89.88deg, #faca41 0.11%, #ffa70e 99.92%);
+
+/******************** BOX SHADOW ********************/
+
+$box-shadow:          0px 0px 15px rgba($shark, 0.15);

@@ -1,0 +1,42 @@
+@import '../../../assets/scss/colors';
+
+.post-card {
+  background-color: $white;
+  box-shadow:       $box-shadow;
+  border-radius:    5px;
+  padding:          15px 10px;
+
+  display:          flex;
+  flex-direction:   column;
+  color:            $shark;
+
+  .title {
+    margin-bottom: 10px;
+    text-align:    center;
+  }
+
+  .username {
+    color: $shark;
+  }
+
+  .date {
+    color:         $silver-chalice;
+    font-size:     12px;
+    margin-bottom: 10px;
+  }
+
+  .content {
+    font-size:     14px;
+    margin-bottom: 15px;
+  }
+
+  .information {
+    display:         flex;
+    align-items:     center;
+    justify-content: flex-end;
+
+    span {
+      margin-left: 10px;
+    }
+  }
+}

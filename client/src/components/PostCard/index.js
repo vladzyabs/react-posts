@@ -19,14 +19,18 @@ export default function PostCard(props) {
   const {body, createAt, commentCount, likeCount, title, username} = props;
 
   return (
-    <div style={{border: '1px solid #000'}}>
-      <h4>{title}</h4>
-      <div>user: {username}</div>
-      <div>date: {formatDate(createAt)}</div>
-      <div>content: {body}</div>
-      <div>
-        <span>❤{likeCount}</span>{'  '}
-        <span>💬{commentCount}</span>
+    <div className={'post-card'}>
+      <h4 className={'title'}>{title}</h4>
+      <div className={'username'}>{username}</div>
+      <div className={'date'}>{formatDate(createAt)}</div>
+
+      <div className={'content'}>
+        {body.length >= 50 ? `${body.substr(0, 50)}...` : body}
+      </div>
+
+      <div className={'information'}>
+        <span>❤{' '}{likeCount}</span>
+        <span>💬{' '}{commentCount}</span>
       </div>
     </div>
   );
