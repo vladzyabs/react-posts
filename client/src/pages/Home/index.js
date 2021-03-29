@@ -1,7 +1,8 @@
 import React        from 'react';
 import { useQuery } from '@apollo/client';
 import gql          from 'graphql-tag';
-import { PostCard } from '../../components';
+
+import { Container, PostCard } from '../../components';
 
 export default function Home() {
   const {loading, data}   = useQuery(FETCH_POSTS_QUERY);
@@ -15,10 +16,12 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
-      {posts && (
-        posts.map(post => <PostCard key={post.id} {...post} />)
-      )}
+      <Container>
+        <h1>Home</h1>
+        {posts && (
+          posts.map(post => <PostCard key={post.id} {...post} />)
+        )}
+      </Container>
     </div>
   );
 }
