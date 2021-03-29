@@ -19,9 +19,6 @@ body {
                            sans-serif;
   -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  padding-top:             70px;
-  background-color:        $athens-gray;
 }
 
 ul {
@@ -30,3 +27,8 @@ ul {
   }
 }
 
+.page-wrapper {
+  padding-top:      70px;
+  padding-bottom:   70px;
+  background-color: $athens-gray;
+}

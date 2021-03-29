@@ -15,7 +15,7 @@ export default function Home() {
   }, [setPosts, data, loading]);
 
   return (
-    <div>
+    <div className={'page-wrapper'}>
       <Container>
         <h1>Home</h1>
         <Grid>

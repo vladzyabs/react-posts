@@ -4,13 +4,13 @@ import * as PropTypes from 'prop-types';
 
 import './scss/style.scss';
 
-Filed.propTypes = {
+Field.propTypes = {
   classNames: PropTypes.string,
   error:      PropTypes.string,
   label:      PropTypes.string,
 };
 
-export default function Filed({className, error, label, ...otherProps}) {
+export default function Field({className, error, label, ...otherProps}) {
   return (
     <div className={classNames('field-wrapper', className)}>
       {label && (
