@@ -1,0 +1,13 @@
+$column-gap: 20px;
+$row-gap:    25px;
+
+.grid {
+  display:   flex;
+  flex-wrap: wrap;
+  margin:    -$row-gap 0 0 (-$column-gap);
+
+  & > * {
+    width:  calc(100% / 3 - #{$column-gap});
+    margin: $row-gap 0 0 $column-gap
+  }
+}

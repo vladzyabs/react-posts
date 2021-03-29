@@ -7,18 +7,20 @@ import { formatDate } from '../../utils';
 
 PostCard.propTypes = {
   id:           PropTypes.string,
-  createAt:     PropTypes.string,
   body:         PropTypes.string,
-  username:     PropTypes.string,
-  likeCount:    PropTypes.number,
+  createAt:     PropTypes.string,
   commentCount: PropTypes.number,
+  likeCount:    PropTypes.number,
+  title:        PropTypes.string,
+  username:     PropTypes.string,
 };
 
 export default function PostCard(props) {
-  const {body, createAt, username, likeCount, commentCount} = props;
+  const {body, createAt, commentCount, likeCount, title, username} = props;
 
   return (
     <div style={{border: '1px solid #000'}}>
+      <h4>{title}</h4>
       <div>user: {username}</div>
       <div>date: {formatDate(createAt)}</div>
       <div>content: {body}</div>

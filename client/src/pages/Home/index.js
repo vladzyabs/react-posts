@@ -2,7 +2,7 @@ import React        from 'react';
 import { useQuery } from '@apollo/client';
 import gql          from 'graphql-tag';
 
-import { Container, PostCard } from '../../components';
+import { Container, Grid, PostCard } from '../../components';
 
 export default function Home() {
   const {loading, data}   = useQuery(FETCH_POSTS_QUERY);
@@ -18,9 +18,11 @@ export default function Home() {
     <div>
       <Container>
         <h1>Home</h1>
-        {posts && (
-          posts.map(post => <PostCard key={post.id} {...post} />)
-        )}
+        <Grid>
+          {posts && (
+            posts.map(post => <PostCard key={post.id} {...post} />)
+          )}
+        </Grid>
       </Container>
     </div>
   );
@@ -36,6 +38,7 @@ const FETCH_POSTS_QUERY = gql`
       username
       commentCount
       likeCount
+      title
     }
   }
 `;
