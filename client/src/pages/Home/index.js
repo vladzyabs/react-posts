@@ -1,8 +1,8 @@
 import React        from 'react';
 import { useQuery } from '@apollo/client';
-import gql          from 'graphql-tag';
 
 import { Container, Grid, PostCard } from '../../components';
+import { FETCH_POSTS_QUERY }         from '../../graphql';
 
 export default function Home() {
   const {loading, data}   = useQuery(FETCH_POSTS_QUERY);
@@ -27,18 +27,3 @@ export default function Home() {
     </div>
   );
 }
-
-const FETCH_POSTS_QUERY = gql`
-  {
-    getPosts{
-      id
-      createdAt
-      body
-      user
-      username
-      commentCount
-      likeCount
-      title
-    }
-  }
-`;
