@@ -57,3 +57,47 @@ export const FETCH_POST_QUERY = gql`
     }
   }
 `;
+
+// Регистрация пользователя
+export const REGISTER_USER = gql`
+  mutation Register(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+  ){
+    register(
+      registerInput: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+      }
+    ){
+      id
+      token
+      username
+      createdAt
+      email
+    }
+  }
+`;
+
+// Авторизация
+export const LOGIN_USER = gql`
+  mutation Login(
+    $email:    String!
+    $password: String!
+  ){
+    login(
+      email:    $email
+      password: $password
+    ){
+      id
+      token
+      username
+      createdAt
+      email
+    }
+  }
+`;
