@@ -1,7 +1,7 @@
 import React           from 'react';
 import { useMutation } from '@apollo/client';
 
-import { Button, Container, Field, Loader } from '../../components';
+import { Button, Container, Field, Loader } from '../../components/@ui';
 import { useForm }                          from '../../utils';
 import { graphql as gql }                   from '../../graphql';
 

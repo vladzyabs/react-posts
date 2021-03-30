@@ -2,13 +2,14 @@ import React        from 'react';
 import { Link }     from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import { Container, Grid, Loader, PostCard } from '../../components';
-import { graphql as gql }                    from '../../graphql';
-import { useAuth }                           from '../../context';
+import { Container, Grid, Loader } from '../../components/@ui';
+import { PostCard }                from '../../components';
+import { graphql }          from '../../graphql';
+import { useAuth }                 from '../../context';
 
 export default function Home() {
   const {user}            = useAuth();
-  const {loading, data}   = useQuery(gql.FETCH_POSTS_QUERY);
+  const {loading, data}   = useQuery(graphql.FETCH_POSTS_QUERY);
   const [posts, setPosts] = React.useState([]);
 
   React.useEffect(() => {
@@ -32,7 +33,7 @@ export default function Home() {
                   <span>create post</span>
                 </Link>
               )}
-              {posts.map(post => <PostCard key={post.id} {...post} />)}
+              {posts.map(post => <PostCard key={post.id} currentUserId={user?.id || null} {...post} />)}
             </>
           )}
         </Grid>

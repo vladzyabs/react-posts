@@ -7,7 +7,7 @@ import './scss/style.scss';
 import PATHS       from '../../paths';
 import { useAuth } from '../../context';
 
-import Container from '../Container';
+import Container from '../@ui/Container';
 
 function Header() {
   const {user, logout}      = useAuth();
