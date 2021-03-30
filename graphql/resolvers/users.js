@@ -26,7 +26,7 @@ module.exports = {
   // Мутации - операции по изменению "состояния" пользователей
   Mutation: {
     // Регистрация
-    register: async (_, {email, password, confirmPassword, username}) => {
+    register: async (_, {registerInput: {email, password, confirmPassword, username}}) => {
       // Проверяем данные на валидность
       const {errors, valid} = validateRegisterInput(email, password, confirmPassword, username);
 
