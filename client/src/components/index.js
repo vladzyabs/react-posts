@@ -4,4 +4,5 @@ export { default as Container } from './Container';
 export { default as Field }     from './Field';
 export { default as Grid }      from './Grid';
 export { default as Header }    from './Header';
+export { default as Loader }    from './Loader';
 export { default as PostCard }  from './PostCard';

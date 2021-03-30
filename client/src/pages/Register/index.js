@@ -1,21 +1,78 @@
-import { Container } from '../../components';
+import React           from 'react';
+import { useMutation } from '@apollo/client';
 
-import { Button, Field } from '../../components';
+import { Button, Container, Field, Loader } from '../../components';
+import { useForm }                          from '../../utils';
+import { REGISTER_USER }                    from '../../graphql';
 
-export default function Register() {
+function Register() {
+  const [errors, setErrors]       = React.useState({});
+  const [registerUser, {loading}] = useMutation(REGISTER_USER);
+
+  const {values, handleSubmit, handleChange} = useForm(
+    {
+      username:        '',
+      password:        '',
+      email:           '',
+      confirmPassword: '',
+    },
+    handleRegister,
+  );
+
+  function handleRegister() {
+    setErrors({});
+    registerUser({
+      variables: values,
+    }).then(
+      res => console.log(res),
+      err => setErrors(err?.graphQLErrors[0]?.extensions?.exception?.errors),
+    );
+  }
+
   return (
     <div className={'page-wrapper'}>
+      {loading && (
+        <Loader />
+      )}
       <Container>
         <h1>Register</h1>
-        <form>
-          <Field label={'Имя'} />
-          <Field label={'Аватар'} type={'file'} />
-          <Field label={'Email'} type='email' />
-          <Field label={'Пароль'} type={'password'} />
-          <Field label={'Подтвердите пароль'} type={'password'} />
+        <form onSubmit={handleSubmit}>
+          {Object.keys(errors).length > 0 && (
+            Object.keys(errors).map((key, i) => <p key={i} style={{color: 'red'}}>{errors[key]}</p>)
+          )}
+
+          <Field
+            label={'Имя'}
+            name={'username'}
+            value={values.username}
+            onChange={handleChange}
+          />
+          <Field
+            label={'Email'}
+            name={'email'}
+            type='email'
+            value={values.email}
+            onChange={handleChange}
+          />
+          <Field
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+            value={values.password}
+            onChange={handleChange}
+          />
+          <Field
+            label={'Подтвердите пароль'}
+            name={'confirmPassword'}
+            type={'password'}
+            value={values.confirmPassword}
+            onChange={handleChange}
+          />
           <Button>Зарегистрироваться</Button>
         </form>
       </Container>
     </div>
   );
 }
+
+export default React.memo(Register);
