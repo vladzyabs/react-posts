@@ -2,10 +2,10 @@ import React        from 'react';
 import { useQuery } from '@apollo/client';
 
 import { Container, Grid, PostCard } from '../../components';
-import { FETCH_POSTS_QUERY }         from '../../graphql';
+import { graphql as gql }            from '../../graphql';
 
 export default function Home() {
-  const {loading, data}   = useQuery(FETCH_POSTS_QUERY);
+  const {loading, data}   = useQuery(gql.FETCH_POSTS_QUERY);
   const [posts, setPosts] = React.useState([]);
 
   React.useEffect(() => {

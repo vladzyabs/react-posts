@@ -3,11 +3,11 @@ import { useMutation } from '@apollo/client';
 
 import { Button, Container, Field, Loader } from '../../components';
 import { useForm }                          from '../../utils';
-import { REGISTER_USER }                    from '../../graphql';
+import { graphql as gql }                   from '../../graphql';
 
 function Register() {
   const [errors, setErrors]       = React.useState({});
-  const [registerUser, {loading}] = useMutation(REGISTER_USER);
+  const [registerUser, {loading}] = useMutation(gql.REGISTER_USER);
 
   const {values, handleSubmit, handleChange} = useForm(
     {

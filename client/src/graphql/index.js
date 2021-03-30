@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 // Получение всех постов
-export const FETCH_POSTS_QUERY = gql`
+const FETCH_POSTS_QUERY = gql`
   {
     getPosts{
       id
@@ -30,7 +30,7 @@ export const FETCH_POSTS_QUERY = gql`
 `;
 
 // Получение поста по id
-export const FETCH_POST_QUERY = gql`
+const FETCH_POST_QUERY = gql`
   query($postId: ID!) {
     getPost(postId: $postId) {
       id
@@ -58,33 +58,81 @@ export const FETCH_POST_QUERY = gql`
   }
 `;
 
-// Регистрация пользователя
-export const REGISTER_USER = gql`
-  mutation Register(
-    $username: String!
-    $email: String!
-    $password: String!
-    $confirmPassword: String!
-  ){
-    register(
-      registerInput: {
-        username: $username
-        email: $email
-        password: $password
-        confirmPassword: $confirmPassword
+// === === === === === === === === === ===
+
+// Добавление комментария
+const CREATE_COMMENT_MUTATION = gql`
+  mutation CreateComment($postId: ID!, $body: String!){
+    createComment(postId: $postId, body: $body){
+      comments{
+        id
+        body
+        user
+        username
+        createdAt
       }
-    ){
-      id
-      token
-      username
-      createdAt
-      email
     }
   }
 `;
 
+// Создание поста
+const CREATE_POST_MUTATION = gql`
+  mutation CreatePost($body: String!, $title: String!){
+    createPost(body: $body, title: $title) {
+      id
+      body
+      title
+      username
+      user
+      createdAt
+      commentCount
+      likeCount
+    }
+  }
+`;
+
+// Удаление комментария
+const DELETE_COMMENT_MUTATION = gql`
+  mutation DeleteComment($postId: ID!, $commentId: ID!){
+    deleteComment(postId: $postId, commentId: $commentId){
+      id
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+      commentCount
+    }
+  }
+`;
+
+// Удаление поста
+const DELETE_POST_MUTATION = gql`
+  mutation DeletePost($postId: ID!){
+    deletePost(postId: $postId)
+  }
+`;
+
+// Лайк поста
+const LIKE_POST_MUTATION = gql`
+  mutation LikePost ($postId: ID!){
+    likePost(postId: $postId){
+      id
+      likes {
+        id
+        user
+        username
+      }
+      likeCount
+    }
+  }
+`;
+
+// === === === === === === === === === ===
+
 // Авторизация
-export const LOGIN_USER = gql`
+const LOGIN_USER = gql`
   mutation Login(
     $email:    String!
     $password: String!
@@ -101,3 +149,42 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+// Регистрация пользователя
+const REGISTER_USER = gql`
+  mutation Register(
+    $username:        String!
+    $email:           String!
+    $password:        String!
+    $confirmPassword: String!
+  ){
+    register(
+      registerInput: {
+        username:        $username
+        email:           $email
+        password:        $password
+        confirmPassword: $confirmPassword
+      }
+    ){
+      id
+      token
+      username
+      createdAt
+      email
+    }
+  }
+`;
+
+export const graphql = {
+  CREATE_COMMENT_MUTATION,
+  CREATE_POST_MUTATION,
+  DELETE_COMMENT_MUTATION,
+  DELETE_POST_MUTATION,
+  LIKE_POST_MUTATION,
+
+  FETCH_POSTS_QUERY,
+  FETCH_POST_QUERY,
+
+  LOGIN_USER,
+  REGISTER_USER,
+};
