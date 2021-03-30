@@ -1,13 +1,16 @@
 import React           from 'react';
 import { useMutation } from '@apollo/client';
 
-import { Button, Container, Field, Loader } from '../../components';
+import { Button, Container, Field, Loader } from '../../components/@ui';
 import { useForm }                          from '../../utils';
-import { LOGIN_USER }                       from '../../graphql';
+import { useAuth }                          from '../../context';
+import { Redirect }                         from 'react-router-dom';
+import { graphql as gql }                   from '../../graphql';
 
 function Login() {
   const [errors, setErrors]    = React.useState({});
-  const [loginUser, {loading}] = useMutation(LOGIN_USER);
+  const [loginUser, {loading}] = useMutation(gql.LOGIN_USER);
+  const {login}                = useAuth();
 
   const {values, handleChange, handleSubmit} = useForm(
     {
@@ -23,7 +26,10 @@ function Login() {
         variables: values,
       },
     ).then(
-      res => console.log(res),
+      res => {
+        login(res.data.login);
+        return <Redirect to='/' />;
+      },
       err => setErrors(err?.graphQLErrors[0]?.extensions?.exception?.errors),
     );
   }
@@ -33,6 +39,7 @@ function Login() {
       {loading && (
         <Loader />
       )}
+
       <Container>
         <h1>Login</h1>
 

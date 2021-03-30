@@ -2,14 +2,14 @@ import React         from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery }  from '@apollo/client';
 
-import { Container }        from '../../components';
-import { FETCH_POST_QUERY } from '../../graphql';
-import { formatDate }       from '../../utils';
+import { Container }      from '../../components/@ui';
+import { formatDate }     from '../../utils';
+import { graphql as gql } from '../../graphql';
 
 export default function Post() {
   const {postId} = useParams();
 
-  const {loading, data} = useQuery(FETCH_POST_QUERY, {
+  const {loading, data} = useQuery(gql.FETCH_POST_QUERY, {
     variables: {
       postId,
     },

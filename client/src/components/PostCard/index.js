@@ -5,7 +5,9 @@ import * as PropTypes from 'prop-types';
 import './scss/style.scss';
 
 import { formatDate } from '../../utils';
-import Button         from '../Button';
+
+import Button           from '../@ui/Button';
+import { Delete, Like } from '../Buttons';
 
 PostCard.propTypes = {
   id:           PropTypes.string,
@@ -13,12 +15,15 @@ PostCard.propTypes = {
   createAt:     PropTypes.string,
   commentCount: PropTypes.number,
   likeCount:    PropTypes.number,
+  likes:        PropTypes.array,
   title:        PropTypes.string,
   username:     PropTypes.string,
 };
 
-export default function PostCard(props) {
-  const {id, body, createAt, commentCount, likeCount, title, username} = props;
+function PostCard(props) {
+  const {id, body, createAt, currentUserId, commentCount, likeCount, likes, title, user, username} = props;
+
+  const isOwnerPost = currentUserId && currentUserId === user;
 
   const history = useHistory();
 
@@ -39,9 +44,21 @@ export default function PostCard(props) {
       <Button onClick={showPost}>Подробнее</Button>
 
       <div className={'information'}>
-        <span>❤{' '}{likeCount}</span>
+        <Like
+          currentUserId={currentUserId}
+          post={{
+            likeCount,
+            likes,
+            postId: id,
+          }}
+        />
         <span>💬{' '}{commentCount}</span>
+        {isOwnerPost && (
+          <Delete postId={id} />
+        )}
       </div>
     </div>
   );
 }
+
+export default React.memo(PostCard);
