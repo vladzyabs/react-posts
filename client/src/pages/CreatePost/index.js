@@ -19,8 +19,8 @@ export default function CreatePost() {
     body:  '',
   }, handleCreate);
 
-  function handleCreate() {
-    createPost({
+  async function handleCreate() {
+    await createPost({
       variables: values,
       update(proxy, result) {
         const data = proxy.readQuery({query: graphql.FETCH_POSTS_QUERY});

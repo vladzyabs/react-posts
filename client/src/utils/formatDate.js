@@ -1,3 +1,2 @@
-export default function formatDate(date) {
-  return new Intl.DateTimeFormat('ru-RU').format(date);
-}
+const formatDate = (date) => new Intl.DateTimeFormat('ru-RU').format(date);
+export default formatDate;

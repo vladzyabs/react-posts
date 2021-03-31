@@ -48,7 +48,7 @@ module.exports = {
       const newPost = new Post({
         body,
         title,
-        user:      user.id,
+        userId:    user.id,
         username:  user.username,
         createdAt: new Date().toISOString(),
       });
@@ -72,7 +72,7 @@ module.exports = {
         const post = await Post.findById(postId);
 
         // Удалять посты может только добавивший их пользователь
-        if (user.id.toString() === post.user.toString()) {
+        if (user.id.toString() === post.userId.toString()) {
           await post.delete();
           return 'Post deleted successfully';
         } else {

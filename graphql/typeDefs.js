@@ -12,7 +12,7 @@ module.exports = gql`
     likes:        [Like]!
     likeCount:    Int!
     title:        String!
-    user:         ID!
+    userId:       ID!
     username:     String!
   }
   # Тип данных для комментариев
@@ -20,7 +20,7 @@ module.exports = gql`
     id:        ID!
     body:      String!
     username:  String!
-    user:      ID!
+    userId:    ID!
     createdAt: String!
   }
   # Тип данных для лайков
@@ -28,7 +28,7 @@ module.exports = gql`
     id:        ID!
     createdAt: String!
     username:  String!
-    user:      ID!
+    userId:    ID!
   }
   # Типы данных для пользователей
   type User {
