@@ -2,11 +2,12 @@ import React         from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery }  from '@apollo/client';
 
-import { Container }      from '../../components/@ui';
-import { formatDate }     from '../../utils';
-import { graphql as gql } from '../../graphql';
-import LikeButton         from '../../components/Buttons/LikeButton';
-import { useAuth }        from '../../context';
+import { Container } from '../../components/@ui';
+import { formatDate }        from '../../utils';
+import { graphql as gql }    from '../../graphql';
+import LikeButton            from '../../components/Buttons/LikeButton';
+import { useAuth }           from '../../context';
+import Commentaries          from '../../components/Commentaries';
 
 export default function Post() {
   const {user}   = useAuth();
@@ -46,20 +47,13 @@ export default function Post() {
 
         <hr />
 
-        {comments.length > 0 && (
-          <div>
-            <span>💬{' '}{commentCount}</span>
-            {comments.map(comment => {
-              return (
-                <div key={comment.id} style={{borderBottom: '1px solid #dadada'}}>
-                  <span>{comment.username}</span>
-                  <span>{formatDate(comment.createdAt)}</span>
-                  <p>{comment.body}</p>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        <Commentaries
+          comments={comments}
+          commentCount={commentCount}
+          currentUserId={user?.id || null}
+          postId={id}
+        />
+
       </Container>
     </div>
   );

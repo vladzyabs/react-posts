@@ -28,7 +28,7 @@ mongoose.connect(MONGODB, {
     console.log(`Server running at ${res.url}`);
   });
 
-// TODO: refactoring models (Post: user -> userId, Like: user -> userId, Comment: user -> userId ...)
+// refactoring models (Post: user -> userId, Like: user -> userId, Comment: user -> userId ...)
 // TODO: added user avatar (display on post card, single post)
 // TODO: added change profile (username, password)
 // TODO: added change post (title, body)
