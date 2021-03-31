@@ -5,8 +5,11 @@ import { useQuery }  from '@apollo/client';
 import { Container }      from '../../components/@ui';
 import { formatDate }     from '../../utils';
 import { graphql as gql } from '../../graphql';
+import LikeButton         from '../../components/Buttons/LikeButton';
+import { useAuth }        from '../../context';
 
 export default function Post() {
+  const {user}   = useAuth();
   const {postId} = useParams();
 
   const {loading, data} = useQuery(gql.FETCH_POST_QUERY, {
@@ -20,7 +23,7 @@ export default function Post() {
   }
 
   const {
-          // id,
+          id,
           title,
           body,
           createdAt,
@@ -28,6 +31,7 @@ export default function Post() {
           comments,
           commentCount,
           likeCount,
+          likes,
         } = data?.getPost;
 
   return (
@@ -38,9 +42,7 @@ export default function Post() {
         <span>{username}</span>
         <p>{body}</p>
 
-        <div className={'information'}>
-          <span>❤{' '}{likeCount}</span>
-        </div>
+        <LikeButton currentUserId={user?.id || null} post={{likes, likeCount, postId: id}} />
 
         <hr />
 

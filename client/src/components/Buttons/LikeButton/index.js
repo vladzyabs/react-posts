@@ -30,7 +30,7 @@ function LikeButton(props) {
   });
 
   React.useEffect(() => {
-    if (currentUserId && likes.find(like => like.user === currentUserId)) {
+    if (currentUserId && likes.find(like => like.userId === currentUserId)) {
       setLiked(true);
     } else {
       setLiked(false);

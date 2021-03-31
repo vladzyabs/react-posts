@@ -28,7 +28,7 @@ module.exports = {
         post.comments.unshift({
           body,
           username,
-          user:      id,
+          userId:    id,
           createdAt: new Date().toISOString(),
         });
 
@@ -58,7 +58,7 @@ module.exports = {
         }
 
         // Комментарии может удалять только добавивший его пользователь
-        if (post.comments[index].user.toString() === user.id.toString()) {
+        if (post.comments[index].userId.toString() === user.id.toString()) {
           // Удаляем комментарий
           post.comments.splice(index, 1);
 
@@ -80,16 +80,16 @@ module.exports = {
       const post = await Post.findById(postId);
 
       if (post) {
-        const liked = post.likes.find(like => like.user.toString() === user.id.toString());
+        const liked = post.likes.find(like => like.userId.toString() === user.id.toString());
 
         if (liked) {
           // Пост "лайкнут"
-          post.likes = post.likes.filter(like => like.user.toString() !== user.id.toString());
+          post.likes = post.likes.filter(like => like.userId.toString() !== user.id.toString());
         } else {
           // Пост не "лайкнут"
           post.likes.push({
             username:  user.username,
-            user:      user.id,
+            userId:    user.id,
             createdAt: new Date().toISOString(),
           });
         }

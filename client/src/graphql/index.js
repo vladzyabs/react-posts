@@ -8,19 +8,19 @@ const FETCH_POSTS_QUERY = gql`
       title
       body
       createdAt
-      user
+      userId
       username
       comments {
         id
         body
         createdAt
-        user
+        userId
         username
       }
       likes {
         id
         createdAt
-        user
+        userId
         username
       }
       commentCount
@@ -37,19 +37,19 @@ const FETCH_POST_QUERY = gql`
       title
       body
       createdAt
-      user
+      userId
       username
       likes {
         id
         createdAt
-        user
+        userId
         username
       }
       comments {
         id
         createdAt
         body
-        user
+        userId
         username
       }
       commentCount
@@ -67,7 +67,7 @@ const CREATE_COMMENT_MUTATION = gql`
       comments{
         id
         body
-        user
+        userId
         username
         createdAt
       }
@@ -83,7 +83,7 @@ const CREATE_POST_MUTATION = gql`
       body
       title
       username
-      user
+      userId
       createdAt
       commentCount
       likeCount
@@ -121,7 +121,7 @@ const LIKE_POST_MUTATION = gql`
       id
       likes {
         id
-        user
+        userId
         username
       }
       likeCount
