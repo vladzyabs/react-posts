@@ -42,7 +42,7 @@ function LikeButton(props) {
   }, [likePost]);
 
   return (
-    <Button onClick={handleClick} disabled={loading}>
+    <Button onClick={handleClick} disabled={!currentUserId || loading}>
       {liked ? '🖤' : '🤍'}
       <span>{likeCount}</span>
     </Button>
