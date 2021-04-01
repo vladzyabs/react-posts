@@ -7,12 +7,14 @@ import { graphql } from '../../../graphql';
 import { Button } from '../../@ui';
 
 DeleteButton.propTypes = {
-  callback:  PropTypes.func,
-  postId:    PropTypes.string,
-  commentId: PropTypes.string,
+  callback:      PropTypes.func,
+  commentId:     PropTypes.string,
+  currentUserId: PropTypes.string,
+  postId:        PropTypes.string,
+  ownerUserId:   PropTypes.string,
 };
 
-function DeleteButton({callback, postId, commentId}) {
+function DeleteButton({callback, commentId, currentUserId, postId, ownerUserId}) {
   const mutation = commentId ? graphql.DELETE_COMMENT_MUTATION : graphql.DELETE_POST_MUTATION;
 
   const [deleteElement, {loading}] = useMutation(mutation, {
@@ -31,6 +33,8 @@ function DeleteButton({callback, postId, commentId}) {
       callback?.(commentId);
     },
   });
+
+  if (currentUserId !== ownerUserId) return null;
 
   return (
     <Button disabled={loading} onClick={deleteElement}>🗑 <span>delete</span></Button>

@@ -71,9 +71,13 @@ function Commentaries({postId, comments, commentCount, currentUserId}) {
               <div key={comment.id} style={{borderBottom: '1px solid #dadada'}}>
                 <span>{comment.username}</span>
                 <span>{formatDate(comment.createdAt)}</span>
-                {currentUserId === comment.userId && (
-                  <DeleteButton postId={postId} commentId={comment.id} callback={handleDeleteComment} />
-                )}
+                <DeleteButton
+                  callback={handleDeleteComment}
+                  currentUserId={currentUserId}
+                  commentId={comment.id}
+                  postId={postId}
+                  ownerUserId={comment.userId}
+                />
                 <p>{comment.body}</p>
               </div>
             );

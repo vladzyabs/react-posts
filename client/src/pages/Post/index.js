@@ -1,23 +1,28 @@
-import React         from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery }  from '@apollo/client';
+import React                     from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useQuery }              from '@apollo/client';
 
-import { Container } from '../../components/@ui';
-import { formatDate }        from '../../utils';
-import { graphql as gql }    from '../../graphql';
-import LikeButton            from '../../components/Buttons/LikeButton';
-import { useAuth }           from '../../context';
-import Commentaries          from '../../components/Commentaries';
+import Commentaries       from '../../components/Commentaries';
+import DeleteButton       from '../../components/Buttons/DeleteButton';
+import LikeButton         from '../../components/Buttons/LikeButton';
+import PATHS              from '../../paths';
+import { Container }      from '../../components/@ui';
+import { formatDate }     from '../../utils';
+import { graphql as gql } from '../../graphql';
+import { useAuth }        from '../../context';
 
 export default function Post() {
   const {user}   = useAuth();
   const {postId} = useParams();
+  const history  = useHistory();
 
   const {loading, data} = useQuery(gql.FETCH_POST_QUERY, {
     variables: {
       postId,
     },
   });
+
+  const handleDeletePost = () => history.push(PATHS.HOME);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -33,6 +38,7 @@ export default function Post() {
           commentCount,
           likeCount,
           likes,
+          userId,
         } = data?.getPost;
 
   return (
@@ -41,6 +47,14 @@ export default function Post() {
         <h1>{title}</h1>
         <span>{formatDate(createdAt)}</span>
         <span>{username}</span>
+
+        <DeleteButton
+          callback={handleDeletePost}
+          currentUserId={user.id}
+          postId={postId}
+          ownerUserId={userId}
+        />
+
         <p>{body}</p>
 
         <LikeButton currentUserId={user?.id || null} post={{likes, likeCount, postId: id}} />
