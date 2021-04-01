@@ -35,3 +35,4 @@ mongoose.connect(MONGODB, {
 // TODO: added change profile (username, password)
 // TODO: added change post (title, body)
 // TODO: search posts (title)
+// TODO: styles

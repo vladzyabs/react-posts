@@ -16,13 +16,19 @@ export default function Post() {
   const {postId} = useParams();
   const history  = useHistory();
 
-  const {loading, data} = useQuery(gql.FETCH_POST_QUERY, {
+  const {loading, data, refetch} = useQuery(gql.FETCH_POST_QUERY, {
     variables: {
       postId,
     },
   });
 
   const handleDeletePost = () => history.push(PATHS.HOME);
+
+  const refetchData = React.useCallback(async () => await refetch(), [refetch]);
+
+  React.useEffect(() => {
+    refetchData();
+  }, [refetchData]);
 
   if (loading) {
     return <h1>Loading...</h1>;

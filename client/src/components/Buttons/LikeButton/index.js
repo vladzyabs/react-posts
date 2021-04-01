@@ -35,6 +35,8 @@ function LikeButton(props) {
     } else {
       setLiked(false);
     }
+
+    return () => setLiked(false);
   }, [currentUserId, likes]);
 
   const handleClick = React.useCallback(async () => {
