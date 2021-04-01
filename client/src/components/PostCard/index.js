@@ -23,13 +23,10 @@ PostCard.propTypes = {
 function PostCard(props) {
   const {id, body, createAt, currentUserId, commentCount, likeCount, likes, title, userId, username} = props;
 
+  const history     = useHistory();
   const isOwnerPost = currentUserId && currentUserId === userId;
 
-  const history = useHistory();
-
-  const showPost = () => {
-    history.push(`/posts/${id}`);
-  };
+  const showPost = () => history.push(`/posts/${id}`);
 
   return (
     <div className={'post-card'}>
