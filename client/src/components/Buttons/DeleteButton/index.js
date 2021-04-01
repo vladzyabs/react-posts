@@ -7,13 +7,18 @@ import { graphql } from '../../../graphql';
 import { Button } from '../../@ui';
 
 DeleteButton.propTypes = {
-  postId: PropTypes.string,
+  callback:  PropTypes.func,
+  postId:    PropTypes.string,
+  commentId: PropTypes.string,
 };
 
-function DeleteButton({postId}) {
-  const [deleteElement, {loading}] = useMutation(graphql.DELETE_POST_MUTATION, {
+function DeleteButton({callback, postId, commentId}) {
+  const mutation = commentId ? graphql.DELETE_COMMENT_MUTATION : graphql.DELETE_POST_MUTATION;
+
+  const [deleteElement, {loading}] = useMutation(mutation, {
     variables: {
       postId,
+      commentId,
     },
     update(proxy) {
       const data = proxy.readQuery({query: graphql.FETCH_POSTS_QUERY});
@@ -22,6 +27,8 @@ function DeleteButton({postId}) {
         query: graphql.FETCH_POSTS_QUERY,
         data:  {getPosts: data.getPosts.filter(post => post.id !== postId)},
       });
+
+      callback?.(commentId);
     },
   });
 

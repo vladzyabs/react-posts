@@ -6,7 +6,8 @@ import PATHS          from '../../paths';
 import { formatDate } from '../../utils';
 import { graphql }    from '../../graphql';
 
-import { Button } from '../@ui';
+import { Button }   from '../@ui';
+import DeleteButton from '../Buttons/DeleteButton';
 
 function Commentaries({postId, comments, commentCount, currentUserId}) {
   const history                           = useHistory();
@@ -40,6 +41,10 @@ function Commentaries({postId, comments, commentCount, currentUserId}) {
     );
   };
 
+  const handleDeleteComment = (commentId) => {
+    setCommentsState(prevState => prevState.filter(comment => comment.id !== commentId));
+  };
+
   React.useEffect(() => {
     if (comments) {
       setCommentsState(comments);
@@ -66,6 +71,9 @@ function Commentaries({postId, comments, commentCount, currentUserId}) {
               <div key={comment.id} style={{borderBottom: '1px solid #dadada'}}>
                 <span>{comment.username}</span>
                 <span>{formatDate(comment.createdAt)}</span>
+                {currentUserId === comment.userId && (
+                  <DeleteButton postId={postId} commentId={comment.id} callback={handleDeleteComment} />
+                )}
                 <p>{comment.body}</p>
               </div>
             );

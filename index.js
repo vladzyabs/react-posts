@@ -29,6 +29,8 @@ mongoose.connect(MONGODB, {
   });
 
 // refactoring models (Post: user -> userId, Like: user -> userId, Comment: user -> userId ...)
+// create comment
+// TODO: delete comment
 // TODO: added user avatar (display on post card, single post)
 // TODO: added change profile (username, password)
 // TODO: added change post (title, body)
